@@ -1,8 +1,6 @@
 # dependencies
 /node_modules
 
-# production build
-/build
 
 # logs
 npm-debug.log*
@@ -22,7 +20,6 @@ yarn-error.log*
 
 # Express.js
 # ignore generated files
-/public/
 /dist/
 /server/node_modules
 
