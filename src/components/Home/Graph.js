@@ -35,7 +35,6 @@ const Graph = () => {
     { country: "Russia", students: 24, color: "#17becf" },
 ]);
 
-console.log(data);
 
   const tableData = [
     {

@@ -52,10 +52,11 @@ export default function Register() {
     }
   }, []);
 
+  // Inside your Register component
   const postData = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(
+      const response = await axios.post(
         `${process.env.REACT_APP_RENDER_URL}/api/users/register`,
         {
           name: name,
@@ -88,7 +89,11 @@ export default function Register() {
         navigate("/");
       }
     } catch (error) {
-      setError("Registration failed. Please try again.");
+      if (error.response && error.response.status === 400) {
+        setError(error.response.data.message);
+      } else {
+        setError("Registration failed. Please try again.");
+      }
       console.error(error);
     }
   };
@@ -136,8 +141,11 @@ export default function Register() {
                 required
                 className=" block w-full"
                 size="small"
-                variant="standard" 
+                variant="standard"
               />
+              {error.includes("Username") && (
+                <div className="text-red-600">{error}</div>
+              )}
             </div>
 
             {/* Fullname */}
@@ -155,7 +163,7 @@ export default function Register() {
                 required
                 className="mt-1 block w-full"
                 size="small"
-                variant="standard" 
+                variant="standard"
               />
             </div>
 
@@ -176,8 +184,11 @@ export default function Register() {
                 required
                 className="mt-1 block w-full"
                 size="small"
-                variant="standard" 
+                variant="standard"
               />
+              {error.includes("Email") && (
+                <div className="text-red-600">{error}</div>
+              )}
             </div>
 
             {/* Password */}
@@ -197,7 +208,7 @@ export default function Register() {
                   required
                   className="mt-1 block w-full"
                   size="small"
-                  variant="standard" 
+                  variant="standard"
                 />
                 <button
                   type="button"
@@ -223,7 +234,7 @@ export default function Register() {
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="mt-1 block w-full"
                 size="small"
-                variant="standard" 
+                variant="standard"
               />
             </div>
 
@@ -242,7 +253,7 @@ export default function Register() {
                 onChange={(e) => setPincode(e.target.value)}
                 className="mt-1 block w-full"
                 size="small"
-                variant="standard" 
+                variant="standard"
               />
             </div>
 
@@ -252,7 +263,8 @@ export default function Register() {
           {/* Submit Buttons */}
           <div className="pt-5">
             <div className="flex justify-end">
-              <Link to="/"
+              <Link
+                to="/"
                 type="button"
                 className="mr-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
               >

@@ -14,7 +14,12 @@ function Volunteer() {
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const [countries, setCountries] = useState(["USA", "Canada", "UK", "Australia"]); // Define countries
+  const [countries, setCountries] = useState([
+    "USA", "Canada", "UK", "Australia", "Germany", "Norway", "Denmark", "Netherlands", 
+    "Singapore", "Ireland", "Italy", "New Zealand", "Philippines", "Austria", 
+    "South Korea", "France", "Spain", "Russia"
+  ]);
+  
   const [showDropdown, setShowDropdown] = useState(false); // State to toggle dropdown visibility
 
   const dropdownRef = useRef(null); // Reference to the dropdown
@@ -133,7 +138,7 @@ function Volunteer() {
               placeholder=" "
               onFocus={() => setShowDropdown(true)} // Show dropdown on focus
             />
-            <div className={`absolute top-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 w-full mt-1 shadow-md rounded-lg z-10 ${showDropdown ? "" : "hidden"}`}>
+            <div className={`absolute max-h-36 overflow-y-auto top-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 w-full mt-1 shadow-md rounded-lg z-10 ${showDropdown ? "" : "hidden"}`}>
               <ul className="py-1">
                 {countries.map((country, index) => (
                   <li
