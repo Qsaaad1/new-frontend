@@ -44,6 +44,14 @@ function App() {
     dispatch(SET_LOGIN(isLoggedIn));
   }, [dispatch]);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      window.location.reload();
+    }, 20000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   const handleLogout = () => {
     // Handle logout logic here
     dispatch(SET_LOGIN(false)); // Assuming this updates the login status in Redux
