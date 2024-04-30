@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import data from "../Volunteers.json";
 import { useCountry } from "./CountryContext";
@@ -14,6 +14,10 @@ function Volunteer() {
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [countries, setCountries] = useState(["USA", "Canada", "UK", "Australia"]); // Define countries
+  const [showDropdown, setShowDropdown] = useState(false); // State to toggle dropdown visibility
+
+  const dropdownRef = useRef(null); // Reference to the dropdown
 
   useEffect(() => {
     setFilters((prevFilters) => ({ ...prevFilters, country: selectedCountry }));
@@ -29,6 +33,20 @@ function Volunteer() {
     );
     setFilteredData(filteredData);
   }, [filters, searchTerm]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const itemsPerPage = 20;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -54,6 +72,11 @@ function Volunteer() {
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleSelectCountry = (selectedCountry) => {
+    setFilters({ ...filters, country: selectedCountry });
+    setShowDropdown(false); // Hide dropdown after selecting a country
   };
 
   return (
@@ -99,7 +122,7 @@ function Volunteer() {
           </div>
         </div>
         <div className="w-56 lg:w-56 sm:w-auto mb-4 sm:mb-0">
-          <div className="relative">
+          <div className="relative" ref={dropdownRef}>
             <input
               type="text"
               id="country_input"
@@ -108,7 +131,21 @@ function Volunteer() {
               value={filters.country}
               onChange={handleFilterChange}
               placeholder=" "
+              onFocus={() => setShowDropdown(true)} // Show dropdown on focus
             />
+            <div className={`absolute top-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 w-full mt-1 shadow-md rounded-lg z-10 ${showDropdown ? "" : "hidden"}`}>
+              <ul className="py-1">
+                {countries.map((country, index) => (
+                  <li
+                    key={index}
+                    className="px-3 py-2 text-sm hover:text-gray-100 dark:text-gray-900 hover:bg-gray-100 dark:hover:bg-red-500 cursor-pointer"
+                    onClick={() => handleSelectCountry(country)}
+                  >
+                    {country}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <label
               htmlFor="country_input"
               className="cursor-text absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
