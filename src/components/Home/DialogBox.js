@@ -9,7 +9,7 @@ function DialogBox({ onClose }) {
   };
 
   return (
-    <div className="fixed bottom-20 left-4 z-50 bg-white text-gray-800 shadow-lg rounded-lg w-80 md:w-96 px-4 py-2 overflow-y-auto max-h-80">
+    <div className="fixed bottom-20 left-8 z-50 bg-white text-gray-800 shadow-lg rounded-lg w-80 md:w-96 px-4 py-2 overflow-y-auto max-h-80">
     <div>
       <div className="flex flex-row justify-between items-center">
         <h3 className="text-lg font-semibold mb-2 text-red-500">FAQ</h3>

@@ -15,14 +15,32 @@ function Volunteer() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [countries, setCountries] = useState([
-    "USA", "Canada", "UK", "Australia", "Germany", "Norway", "Denmark", "Netherlands", 
-    "Singapore", "Ireland", "Italy", "New Zealand", "Philippines", "Austria", 
-    "South Korea", "France", "Spain", "Russia"
+    "USA",
+    "Canada",
+    "UK",
+    "Australia",
+    "Germany",
+    "Norway",
+    "Denmark",
+    "Netherlands",
+    "Singapore",
+    "Ireland",
+    "Italy",
+    "New Zealand",
+    "Philippines",
+    "Austria",
+    "South Korea",
+    "France",
+    "Spain",
+    "Russia",
   ]);
-  
-  const [showDropdown, setShowDropdown] = useState(false); // State to toggle dropdown visibility
+  const [cities, setCities] = useState([]); // State to store cities for the selected country
 
-  const dropdownRef = useRef(null); // Reference to the dropdown
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false); // State to toggle country dropdown visibility
+  const [showCityDropdown, setShowCityDropdown] = useState(false); // State to toggle city dropdown visibility
+
+  const countryDropdownRef = useRef(null); // Reference to the country dropdown
+  const cityDropdownRef = useRef(null); // Reference to the city dropdown
 
   useEffect(() => {
     setFilters((prevFilters) => ({ ...prevFilters, country: selectedCountry }));
@@ -41,8 +59,17 @@ function Volunteer() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowDropdown(false);
+      if (
+        countryDropdownRef.current &&
+        !countryDropdownRef.current.contains(event.target)
+      ) {
+        setShowCountryDropdown(false);
+      }
+      if (
+        cityDropdownRef.current &&
+        !cityDropdownRef.current.contains(event.target)
+      ) {
+        setShowCityDropdown(false);
       }
     };
 
@@ -52,6 +79,18 @@ function Volunteer() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    // Update cities when country filter changes
+    const filteredCities = data
+      .filter(
+        (item) => item.Countries.toLowerCase() === filters.country.toLowerCase()
+      )
+      .map((item) => item.Cities)
+      .filter((value, index, self) => self.indexOf(value) === index);
+
+    setCities(filteredCities);
+  }, [filters.country]);
 
   const itemsPerPage = 20;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -81,7 +120,12 @@ function Volunteer() {
 
   const handleSelectCountry = (selectedCountry) => {
     setFilters({ ...filters, country: selectedCountry });
-    setShowDropdown(false); // Hide dropdown after selecting a country
+    setShowCountryDropdown(false); // Hide country dropdown after selecting a country
+  };
+
+  const handleSelectCity = (selectedCity) => {
+    setFilters({ ...filters, city: selectedCity });
+    setShowCityDropdown(false); // Hide city dropdown after selecting a city
   };
 
   return (
@@ -107,6 +151,8 @@ function Volunteer() {
           </span>
         </div>
       </div>
+
+      {/* FILTERS */}
       <div className="flex flex-wrap justify-center sm:justify-start sm:gap-4 pb-4">
         <div className="w-56 lg:w-56 sm:w-auto mb-4 sm:mb-0">
           <div className="relative">
@@ -126,56 +172,80 @@ function Volunteer() {
             </label>
           </div>
         </div>
-        <div className="w-56 lg:w-56 sm:w-auto mb-4 sm:mb-0">
-          <div className="relative" ref={dropdownRef}>
-            <input
-              type="text"
-              id="country_input"
-              className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer cursor-text"
-              name="country"
-              value={filters.country}
-              onChange={handleFilterChange}
-              placeholder=" "
-              onFocus={() => setShowDropdown(true)} // Show dropdown on focus
-            />
-            <div className={`absolute max-h-36 overflow-y-auto top-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 w-full mt-1 shadow-md rounded-lg z-10 ${showDropdown ? "" : "hidden"}`}>
-              <ul className="py-1">
-                {countries.map((country, index) => (
-                  <li
-                    key={index}
-                    className="px-3 py-2 text-sm hover:text-gray-100 dark:text-gray-900 hover:bg-gray-100 dark:hover:bg-red-500 cursor-pointer"
-                    onClick={() => handleSelectCountry(country)}
-                  >
-                    {country}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <label
+        <div
+          className="w-56 lg:w-56 sm:w-auto mb-4 sm:mb-0 relative"
+          ref={countryDropdownRef}
+        >
+          <input
+            type="text"
+            id="country_input"
+            className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer cursor-text"
+            name="country"
+            value={filters.country}
+            onChange={handleFilterChange}
+            placeholder=""
+            onFocus={() => setShowCountryDropdown(true)} // Show country dropdown on focus
+          />
+          <label
               htmlFor="country_input"
               className="cursor-text absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
             >
-              Filter by Country
+              Search Country
             </label>
+          <div
+            className={`absolute max-h-36 overflow-y-auto top-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 w-full mt-1 shadow-md rounded-lg z-10 ${
+              showCountryDropdown ? "" : "hidden"
+            }`}
+          >
+            <ul className="py-1">
+              {countries.map((country, index) => (
+                <li
+                  key={index}
+                  className="px-3 py-2 text-sm hover:text-gray-100 dark:text-gray-900 hover:bg-gray-100 dark:hover:bg-red-500 cursor-pointer"
+                  onClick={() => handleSelectCountry(country)}
+                >
+                  {country}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-        <div className="w-56 lg:w-56 sm:w-auto mb-4 sm:mb-0">
-          <div className="relative">
-            <input
-              type="text"
-              id="city_input"
-              className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer cursor-text"
-              name="city"
-              value={filters.city}
-              onChange={handleFilterChange}
-              placeholder=" "
-            />
-            <label
+        <div
+          className="w-56 lg:w-56 sm:w-auto mb-4 sm:mb-0 relative"
+          ref={cityDropdownRef}
+        >
+          <input
+            type="text"
+            id="city_input"
+            className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer cursor-text"
+            name="city"
+            value={filters.city}
+            onChange={handleFilterChange}
+            placeholder=""
+            onFocus={() => setShowCityDropdown(true)} // Show city dropdown on focus
+          />
+          <label
               htmlFor="city_input"
               className="cursor-text absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
             >
-              Filter by City
+              Search City
             </label>
+          <div
+            className={`absolute max-h-36 overflow-y-auto top-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 w-full mt-1 shadow-md rounded-lg z-10 ${
+              showCityDropdown ? "" : "hidden"
+            }`}
+          >
+            <ul className="py-1">
+              {cities.map((city, index) => (
+                <li
+                  key={index}
+                  className="px-3 py-2 text-sm hover:text-gray-100 dark:text-gray-900 hover:bg-gray-100 dark:hover:bg-red-500 cursor-pointer"
+                  onClick={() => handleSelectCity(city)}
+                >
+                  {city}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

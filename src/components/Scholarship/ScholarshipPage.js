@@ -34,30 +34,28 @@ function ScholarshipPage() {
               />
             </div>
             <div className="p-4">
+            <div className="mb-4">
+                <h2 className="text-lg font-semibold mb-2">Information</h2>
+                <p>{scholarshipData.additional}</p>
+              </div>
               <div className="mb-4">
                 <h2 className="text-lg font-semibold mb-2">Funding</h2>
                 <p>{scholarshipData.funding}</p>
               </div>
               <div className="mb-4">
-                <h2 className="text-lg font-semibold mb-2">Eligibility</h2>
+                <h2 className="text-lg font-semibold mb-2 ">Eligibility</h2>
                 <p>{scholarshipData.eligibility}</p>
               </div>
               <div className="mb-4">
                 <h2 className="text-lg font-semibold mb-2">Process</h2>
                 <p>{scholarshipData.process}</p>
               </div>
+              
               <div className="mb-4">
                 <h2 className="text-lg font-semibold mb-2">Dates</h2>
                 <p>{scholarshipData.dates}</p>
               </div>
-              <div className="mb-4">
-                <h2 className="text-lg font-semibold mb-2">Requirements</h2>
-                <p>{scholarshipData.requirements}</p>
-              </div>
-              <div className="mb-4">
-                <h2 className="text-lg font-semibold mb-2">Additional Information</h2>
-                <p>{scholarshipData.additional}</p>
-              </div>
+             
             </div>
           </div>
         </>

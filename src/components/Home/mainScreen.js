@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 function MainScreen() {
   const imagesWithText = [
     {
-      imageUrl: "video.gif",
-      heading: "",
-      text1: "Lead a hand to make this world a",
-      text2: "better place",
-      isStudentButtonVisible: true,
-      isVolunteerButtonVisible: false,
-    },
-    {
       imageUrl: "page-2.png",
       heading: "Talk to students before going abroad and then take a call",
       text1: "BE A PART OF THE BIGGEST COMMUNITY",
       text2: "OF INTERNATIONAL STUDENTS",
       isStudentButtonVisible: false,
       isVolunteerButtonVisible: true,
+    },
+    {
+      imageUrl: "image.png",
+      heading: "",
+      text1: "Lead a hand to make this world a",
+      text2: "better place",
+      isStudentButtonVisible: true,
+      isVolunteerButtonVisible: false,
     },
     // Add more objects for additional images and text
   ];
@@ -66,7 +66,7 @@ function MainScreen() {
             <div className="flex flex-col font-mono mx-10 px-4 py-2 rounded-lg text-white text-xl md:text-3xl lg:text-4xl text-center">
               {item.heading ? (
                 <div>
-                  <h2 className="sm:text-3xl font-bold border rounded-full px-4 text-sm p-1 mt-10 ">
+                  <h2 className="sm:text-3xl font-bold  px-4 text-sm p-1 mt-10 ">
                     {item.heading}
                   </h2>{" "}
                   <hr className="mt-4" />
@@ -76,7 +76,9 @@ function MainScreen() {
                   <h1 className="p-1 mt-12"></h1>
                 </div>
               )}
-              <p className="align-center mt-32 text-sm sm:text-3xl">{item.text1}</p>
+              <p className="align-center mt-32 text-sm sm:text-3xl">
+                {item.text1}
+              </p>
               <p className="text-sm sm:text-3xl">{item.text2}</p>
               <div className="relative z-10 mt-4">
                 {item.isStudentButtonVisible && (
@@ -85,17 +87,17 @@ function MainScreen() {
                       type="button"
                       className="text-white bg-gradient-to-br from-red-700 to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800  rounded-lg text-sm sm:text-base  px-4 py-2  sm:px-5 sm:py-2.5  text-center me-2 mb-2"
                     >
-                      Register as a Student
+                      Register as a Volunteer
                     </button>
                   </Link>
                 )}
                 {item.isVolunteerButtonVisible && (
-                  <Link to="/registervolunteer">
+                  <Link to="/community">
                     <button
                       type="button"
                       className="text-white bg-gradient-to-br from-red-700 to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800  rounded-lg text-sm sm:text-base  px-4 py-2  sm:px-5 sm:py-2.5  text-center me-2 mb-2"
                     >
-                      Register as a Volunteer
+                      Talk to students
                     </button>
                   </Link>
                 )}

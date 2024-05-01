@@ -68,7 +68,7 @@ function VolunteerProfile() {
             htmlFor="Countrie"
             className="block text-gray-700 font-bold mb-2"
           >
-            Countrie
+            Country
           </label>
           <input
             type="text"
@@ -84,7 +84,7 @@ function VolunteerProfile() {
             htmlFor="Citie"
             className="block text-gray-700 font-bold mb-2"
           >
-             Citie
+             City
           </label>
           <input
             type="text"

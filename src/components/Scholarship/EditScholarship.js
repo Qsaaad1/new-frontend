@@ -34,7 +34,6 @@ export default function EditScholarship() {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching scholarship data:', error);
-        // Handle error here
       }
     }
 
@@ -112,6 +111,18 @@ export default function EditScholarship() {
           />
         </div>
         <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="additional">
+             Information
+          </label>
+          <textarea
+            id="additional"
+            placeholder=" Information"
+            value={additional}
+            onChange={(ev) => setAdditional(ev.target.value)}
+            className="block w-full px-3 py-2 border border-gray-300 rounded bg-white resize-none"
+          />
+        </div>
+        <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="funding">
             Funding
           </label>
@@ -161,30 +172,8 @@ export default function EditScholarship() {
             className="block w-full px-3 py-2 border border-gray-300 rounded bg-white"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="requirements">
-            Requirements
-          </label>
-          <textarea
-            id="requirements"
-            placeholder="Requirements"
-            value={requirements}
-            onChange={(ev) => setRequirements(ev.target.value)}
-            className="block w-full px-3 py-2 border border-gray-300 rounded bg-white resize-none"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="additional">
-            Additional Information
-          </label>
-          <textarea
-            id="additional"
-            placeholder="Additional Information"
-            value={additional}
-            onChange={(ev) => setAdditional(ev.target.value)}
-            className="block w-full px-3 py-2 border border-gray-300 rounded bg-white resize-none"
-          />
-        </div>
+        
+        
         <div className="flex items-center justify-center">
           <button
             type="submit"

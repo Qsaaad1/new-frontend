@@ -36,7 +36,7 @@ export default function ScholarshipPost() {
     formData.append('additional', additional);
     console.log(formData);
     try {
-      const response = await axios.post(`${process.env.REACT_APP_RENDER_URL}/scholarship`, formData, {
+      const response = await axios.post(`http://localhost:8000/scholarship`, formData, {
         withCredentials: true, // Ensure credentials are included
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -82,6 +82,18 @@ export default function ScholarshipPost() {
             type="file"
             onChange={(ev) => setFiles(ev.target.files)}
             className="mb-2"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="additional">
+             Information
+          </label>
+          <textarea
+            id="additional"
+            placeholder="Information"
+            value={additional}
+            onChange={(ev) => setAdditional(ev.target.value)}
+            className="block w-full px-3 py-2 border border-gray-300 rounded bg-white resize-none"
           />
         </div>
         <div className="mb-4">
@@ -134,30 +146,8 @@ export default function ScholarshipPost() {
             className="block w-full px-3 py-2 border border-gray-300 rounded bg-white"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="requirements">
-            Requirements
-          </label>
-          <textarea
-            id="requirements"
-            placeholder="Requirements"
-            value={requirements}
-            onChange={(ev) => setRequirements(ev.target.value)}
-            className="block w-full px-3 py-2 border border-gray-300 rounded bg-white resize-none"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="additional">
-            Additional Information
-          </label>
-          <textarea
-            id="additional"
-            placeholder="Additional Information"
-            value={additional}
-            onChange={(ev) => setAdditional(ev.target.value)}
-            className="block w-full px-3 py-2 border border-gray-300 rounded bg-white resize-none"
-          />
-        </div>
+       
+       
         <div className="flex items-center justify-center">
           <button
             type="submit"

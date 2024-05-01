@@ -7,15 +7,16 @@ import { selectIsLoggedIn, selectName } from "../redux/features/auth/authSlice";
 import logo from "../assets/logo.jpeg";
 import SendIcon from "@mui/icons-material/Send";
 import { Helmet } from "react-helmet";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function Chatting() {
   const location = useLocation();
   const { name, country, city, university, image } = location.state;
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const username = useSelector(selectName);
-
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [showSuggestedQuestions, setShowSuggestedQuestions] = useState(true);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -145,6 +146,56 @@ export default function Chatting() {
 
       {/* Chat input at bottom */}
       <div className="bg-gray-200 p-4 flex sticky bottom-0 z-10">
+        {showSuggestedQuestions ? (
+          <div className="absolute bottom-24 max-w-sm bg-red-500 p-4  rounded-lg shadow-md text-white">
+            <div className="flex justify-between mb-2">
+              <h3 className="font-semibold mb-2">Suggested Questions:</h3>
+              <button
+                onClick={() => setShowSuggestedQuestions(false)}
+                className="text-white hover:text-gray-200 mb-3 focus:outline-none"
+              >
+                <CloseIcon className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                className="bg-white text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
+                onClick={() =>
+                  setNewMessage(
+                    "What advice do you have for someone planning to study abroad?"
+                  )
+                }
+              >
+                What's your cost of living?
+              </button>
+              <button
+                className="bg-white text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
+                onClick={() =>
+                  setNewMessage("How did you prepare for your journey abroad?")
+                }
+              >
+                ⁠Is this right to come there?
+              </button>
+              <button
+                className="bg-white text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
+                onClick={() =>
+                  setNewMessage(
+                    "What challenges did you face while studying abroad and how did you overcome them?"
+                  )
+                }
+              >
+                Did you take help of a consultant to file your visa?
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => setShowSuggestedQuestions(true)}
+            className="absolute bottom-24 left-4 bg-red-500 text-white px-4 py-2 rounded-full shadow-md hover:bg-red-600 focus:outline-none"
+          >
+            Show Suggested Questions
+          </button>
+        )}
         <input
           type="text"
           className="w-full py-2 px-3 border rounded-md focus:outline-none focus:border-blue-400"
