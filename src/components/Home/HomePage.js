@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 import { selectIsLoggedIn } from "../../redux/features/auth/authSlice";
 import MainScreen from "./mainScreen";
 import Volunteers from "./Volunteers";
@@ -9,13 +10,11 @@ import DialogButton from "./dialogButton";
 import DialogBox from "./DialogBox";
 import Graph from "./Graph";
 import ContactPage from "./ContactPage";
-import { Helmet } from "react-helmet";
 import wavy from "../../assets/wavy.jpeg";
 import TopCountries from "./TopCountries";
 
 export default function Home() {
   const [showChat, setShowChat] = useState(false);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const toggleChat = () => {
     setShowChat(!showChat);
@@ -29,7 +28,7 @@ export default function Home() {
     } else {
       intervalId = setInterval(() => {
         toggleChat();
-      }, 600000); // 10 minutes interval
+      }, 1200000); 
     }    
     return () => clearInterval(intervalId);
   }, [showChat]);
@@ -41,6 +40,14 @@ export default function Home() {
     backgroundAttachment: "fixed",
     top: 0,
   };
+  
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      window.location.reload();
+    }, 20000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div>
@@ -58,13 +65,8 @@ export default function Home() {
       </Helmet>
 
       <MainScreen />
-
-
       <Graph />
-
-
       <Volunteers />
-      {/* <div className="text-5xl sm:text-9xl font-bold relative" style={{ backgroundImage: `url('https://img.freepik.com/free-photo/top-view-monochromatic-pattern_23-2148770327.jpg?t=st=1713784480~exp=1713788080~hmac=f957d226452a10b675ba666592a5782a958d219f10dc1f2eed70000265aa7e45&w=1800')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}> */}
 
       <header className="text-center">
         <div className="text-5xl sm:text-9xl font-bold relative bg-gray-200 ">
@@ -81,15 +83,15 @@ export default function Home() {
       <Questions />
       <ContactPage />
       <Footer />
-      {!isLoggedIn &&
-        (showChat ? (
-          <div>
-            <DialogBox onClose={toggleChat} />
-            <DialogButton onClick={toggleChat} />
-          </div>
-        ) : (
+      
+      {showChat && (
+        <div>
+          <DialogBox onClose={toggleChat} />
           <DialogButton onClick={toggleChat} />
-        ))}
+        </div>
+      )}
+
+      {!showChat && <DialogButton onClick={toggleChat} />}
     </div>
   );
 }
