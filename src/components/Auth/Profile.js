@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { selectName } from "../../redux/features/auth/authSlice";
 import { useSelector } from "react-redux";
-import { Helmet } from "react-helmet";
 
 function Profile() {
   const user = useSelector(selectName);
@@ -34,18 +33,7 @@ function Profile() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Helmet>
-        <title>User Profile - Aspiring Abroad</title>
-        <meta
-          name="description"
-          content="View and manage your user profile details on Aspiring Abroad. Access your username, full name, email, phone number, and pincode information."
-        />
-        <meta
-          name="keywords"
-          content="user profile, account details, personal information, username, full name, email, phone number, pincode, user management"
-        />
-        {/* Add other meta tags as needed */}
-      </Helmet>
+    
 
       <h1 className="text-3xl font-semibold mb-4">Profile</h1>
       <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden">

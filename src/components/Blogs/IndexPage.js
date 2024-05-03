@@ -1,6 +1,6 @@
 import Post from "../../Post";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import NotFoundPage from "../NotFoundPage";
 
 export default function IndexPage() {
@@ -34,7 +34,7 @@ export default function IndexPage() {
           name="keywords"
           content="blogs, study abroad blogs, international education blogs, education articles, student experiences, scholarship tips, study abroad advice"
         />
-        {/* Add other meta tags as needed */}
+        <link rel="canonical" href="https://aspiring-abroad.com/blogs" />
       </Helmet>
 
      

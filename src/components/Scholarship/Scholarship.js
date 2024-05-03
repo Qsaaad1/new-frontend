@@ -3,11 +3,11 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectRole } from "../../redux/features/auth/authSlice";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Scholarship = () => {
   const [scholarships, setScholarships] = useState([]);
-  const [error, setError] = useState(false); // State to track error
+  const [error, setError] = useState(false); 
   const role = useSelector(selectRole);
 
   useEffect(() => {
@@ -34,13 +34,13 @@ const Scholarship = () => {
         <title>Scholarships - Aspiring Abroad</title>
         <meta
           name="description"
-          content="Explore a variety of scholarships offered by Aspiring Abroad to support your international education journey. Find funding opportunities for students pursuing higher education abroad."
+          content="Discover scholarships from Aspiring Abroad to fund your international education. Support for students studying abroad."
         />
         <meta
           name="keywords"
           content="study abroad scholarships, international education funding, student scholarships, overseas education grants, higher education funding, financial aid for studying abroad, scholarship opportunities, education grants, academic scholarships, merit-based scholarships, need-based scholarships, undergraduate scholarships, graduate scholarships, scholarship programs, study abroad financial support"
         />
-        {/* Add other meta tags as needed */}
+        <link rel="canonical" href="https://aspiring-abroad.com/scholarships" />
       </Helmet>
 
       <div className="container mx-auto mt-4 mb-8">

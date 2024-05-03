@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 import { selectIsLoggedIn } from "../../redux/features/auth/authSlice";
 import MainScreen from "./mainScreen";
 import Volunteers from "./Volunteers";
@@ -12,6 +12,7 @@ import Graph from "./Graph";
 import ContactPage from "./ContactPage";
 import wavy from "../../assets/wavy.jpeg";
 import TopCountries from "./TopCountries";
+import { Helmet } from "react-helmet-async";
 
 export default function Home() {
   const [showChat, setShowChat] = useState(false);
@@ -55,13 +56,13 @@ export default function Home() {
         <title>Study Abroad Programs - Aspiring Abroad</title>
         <meta
           name="description"
-          content="Explore our comprehensive study abroad programs and discover opportunities to pursue your education internationally. Learn about scholarships, application procedures, and more at Aspiring Abroad."
+          content="Discover study abroad programs for international education, scholarships, and application procedures at Aspiring Abroad."
         />
         <meta
           name="keywords"
           content="study abroad,Study abroad programs, international education, scholarships, foreign study, overseas education, Where should I study?, Living expenses in Germany, Living expenses in USA, Living expenses in Uk, Living expenses in Canada, Living expenses in France, Living expenses in Australia"
         />
-        <link rel="preload" href={wavy} as="image" />
+        <link rel="canonical" href="https://aspiring-abroad.com/" />
       </Helmet>
 
       <MainScreen />
