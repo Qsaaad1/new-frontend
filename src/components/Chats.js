@@ -268,7 +268,7 @@ const Chats = () => {
           <div className="relative">
             {/* Suggested questions */}
             {selectedReceiver && showSuggestedQuestions ? (
-              <div className="absolute bottom-24 max-w-sm bg-red-500 p-4 ml-5 rounded-lg shadow-md text-white">
+              <div className="absolute bottom-24 max-w-56 sm:max-w-xs bg-red-500 p-4 ml-5 rounded-lg shadow-md text-white">
                 <div className="flex justify-between mb-2">
                   <h3 className="font-semibold mb-2 text-lg">Suggested Questions:</h3>
                   <button
