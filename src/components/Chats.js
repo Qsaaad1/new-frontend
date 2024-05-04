@@ -270,7 +270,7 @@ const Chats = () => {
             {selectedReceiver && showSuggestedQuestions ? (
               <div className="absolute bottom-24 max-w-sm bg-red-500 p-4 ml-5 rounded-lg shadow-md text-white">
                 <div className="flex justify-between mb-2">
-                  <h3 className="font-semibold mb-2">Suggested Questions:</h3>
+                  <h3 className="font-semibold mb-2 text-lg">Suggested Questions:</h3>
                   <button
                     onClick={() => setShowSuggestedQuestions(false)}
                     className="text-white hover:text-gray-200 mb-3 focus:outline-none"
@@ -280,30 +280,30 @@ const Chats = () => {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
-                    className="bg-white text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
+                    className="bg-white text-xs text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
                     onClick={() =>
                       setNewMessage(
-                        "What advice do you have for someone planning to study abroad?"
+                        "What's your cost of living?"
                       )
                     }
                   >
                     What's your cost of living?
                   </button>
                   <button
-                    className="bg-white text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
+                    className="bg-white text-xs text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
                     onClick={() =>
                       setNewMessage(
-                        "How did you prepare for your journey abroad?"
+                        "⁠Is this right to come there?"
                       )
                     }
                   >
                     ⁠Is this right to come there?
                   </button>
                   <button
-                    className="bg-white text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
+                    className="bg-white text-xs text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
                     onClick={() =>
                       setNewMessage(
-                        "What challenges did you face while studying abroad and how did you overcome them?"
+                        "Did you take help of a consultant to file your visa?"
                       )
                     }
                   >
@@ -314,7 +314,7 @@ const Chats = () => {
             ) : (
               <button
                 onClick={() => setShowSuggestedQuestions(true)}
-                className="absolute bottom-24 left-4 bg-red-500 text-white px-4 py-2 rounded-full shadow-md hover:bg-red-600 focus:outline-none"
+                className="absolute bottom-20 left-4 text-xs bg-red-500 opacity-95 text-white px-2 py-2 rounded-full shadow-md hover:bg-red-600 focus:outline-none"
               >
                 Show Suggested Questions
               </button>

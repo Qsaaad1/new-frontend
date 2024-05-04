@@ -134,7 +134,8 @@ function Volunteer() {
         <title>Community - Aspiring Abroad</title>
         <meta
           name="description"
-          content="Explore a community of volunteers from various countries and cities who are willing to assist and support international students in their education journey. Connect with volunteers, chat with them, and gain valuable insights and advice on studying abroad."
+          content=
+          "Connect with volunteers worldwide to support international students in their education journey. Gain insights and advice on studying abroad."
         />
         <meta
           name="keywords"
