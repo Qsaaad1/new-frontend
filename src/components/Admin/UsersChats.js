@@ -24,7 +24,13 @@ const UsersChats = () => {
 
   useEffect(() => {
     fetchReceivers();
-  }, [chatMessages]);
+    const interval = setInterval(() => {
+      if (selectedReceiver) {
+        fetchChatMessages(selectedReceiver.First_Name+ " " +selectedReceiver.Last_name);
+      }
+    }, 5000); // Call every 10 seconds
+    return () => clearInterval(interval);
+  }, [chatMessages, selectedReceiver]);
 
   useEffect(() => {
     setFilteredReceivers(

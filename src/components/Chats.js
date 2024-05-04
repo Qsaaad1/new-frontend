@@ -25,7 +25,14 @@ const Chats = () => {
 
   useEffect(() => {
     fetchReceivers();
-  }, [chatMessages]);
+    const interval = setInterval(() => {
+      if (selectedReceiver) {
+        fetchChatMessages(selectedReceiver.First_Name+ " " +selectedReceiver.Last_name);
+      }
+    }, 5000); // Call every 10 seconds
+    return () => clearInterval(interval);
+  }, [chatMessages, selectedReceiver]);
+
 
   useEffect(() => {
     setFilteredReceivers(
@@ -61,6 +68,7 @@ const Chats = () => {
     const response = await axios.get(
       `${process.env.REACT_APP_RENDER_URL}/${receiver.receiver}/${username}`
     );
+    console.log(response.data[0]);
     setSelectedReceiver(response.data[0]);
     fetchChatMessages(receiver.receiver);
     setSidebarVisible(false); // Hide sidebar on receiver click
