@@ -21,7 +21,7 @@ export default function EditScholarship() {
   useEffect(() => {
     async function fetchScholarship() {
       try {
-        const response = await axios.get(`http://localhost:8000/scholarships/${id}`);
+        const response = await axios.get(`https://aspiring-abroad.com/api/scholarships/${id}`);
         console.log(response.data);
         const scholarshipData = response.data;
         setName(scholarshipData.name);
@@ -58,7 +58,7 @@ export default function EditScholarship() {
     formData.append('additional', additional);
     console.log(formData);
     try {
-      const response = await axios.put(`http://localhost:8000/scholarship/${id}`, formData, {
+      const response = await axios.put(`https://aspiring-abroad.com/api/scholarship/${id}`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
