@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
 
-
-
 function Navinfo() {
   const scrollToBottom = () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
@@ -17,7 +15,7 @@ function Navinfo() {
     <nav className="justify-between bg-gray-100 border border-gray-900 text-gray-800 p-2 hidden sm:flex my-auto">
       <div className="mx-10 my-auto">
         <div className="flex gap-4 text-sm text-gray-600">
-          <span><EmailIcon className="text-red-500"/>: {companyEmail}</span>
+          <span><EmailIcon className="text-red-500"/>: <a href={`mailto:${companyEmail}`} className="hover:text-red-500 hover:underline ">{companyEmail}</a></span>
         </div>
       </div>
       <div className="flex flex-row mx-10">
