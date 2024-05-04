@@ -7,16 +7,15 @@ import { selectIsLoggedIn, selectName } from "../redux/features/auth/authSlice";
 import logo from "../assets/logo.jpeg";
 import SendIcon from "@mui/icons-material/Send";
 import { Helmet } from "react-helmet";
-import CloseIcon from "@mui/icons-material/Close";
 
 export default function Chatting() {
   const location = useLocation();
   const { name, country, city, university, image } = location.state;
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const username = useSelector(selectName);
+
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [showSuggestedQuestions, setShowSuggestedQuestions] = useState(true);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -60,10 +59,11 @@ export default function Chatting() {
       setNewMessage("");
       fetchMessages();
       await axios.post(`${process.env.REACT_APP_RENDER_URL}/notification`, {
-        sender: name,
-        receiver: username,
+        sender: username,
+        receiver: name,
         text: newMessage,
         profile: image,
+        role: "admin",
       });
     } catch (error) {
       console.error("Error sending message:", error);
@@ -88,7 +88,7 @@ export default function Chatting() {
           name="keywords"
           content="chats, messaging, conversations, student community, study abroad, international students, chat application, peer support, student advice, communication platform"
         />
-        <link rel="canonical" href="https://aspiring-abroad.com/chatting" />
+        <link rel="canonical" href="https://aspiring-abroad.com/chats" />
       </Helmet>
 
       {/* Main chat area */}
@@ -146,56 +146,6 @@ export default function Chatting() {
 
       {/* Chat input at bottom */}
       <div className="bg-gray-200 p-4 flex sticky bottom-0 z-10">
-        {showSuggestedQuestions ? (
-          <div className="absolute bottom-24 max-w-sm bg-red-500 p-4  rounded-lg shadow-md text-white">
-            <div className="flex justify-between mb-2">
-              <h3 className="font-semibold mb-2 text-lg">Suggested Questions:</h3>
-              <button
-                onClick={() => setShowSuggestedQuestions(false)}
-                className="text-white hover:text-gray-200 mb-3 focus:outline-none"
-              >
-                <CloseIcon className="h-6 w-6" />
-              </button>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <button
-                className="bg-white text-xs text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
-                onClick={() =>
-                  setNewMessage(
-                    "What's your cost of living?"
-                  )
-                }
-              >
-                What's your cost of living?
-              </button>
-              <button
-                className="bg-white text-xs text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
-                onClick={() =>
-                  setNewMessage("⁠Is this right to come there?")
-                }
-              >
-                ⁠Is this right to come there?
-              </button>
-              <button
-                className="bg-white text-xs text-red-500 px-2 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
-                onClick={() =>
-                  setNewMessage(
-                    "Did you take help of a consultant to file your visa?"
-                  )
-                }
-              >
-                Did you take help of a consultant to file your visa?
-              </button>
-            </div>
-          </div>
-        ) : (
-          <button
-            onClick={() => setShowSuggestedQuestions(true)}
-            className="absolute bottom-20 left-4 text-xs bg-red-500 text-white px-2 py-2 opacity-95 rounded-full shadow-md hover:bg-red-600 focus:outline-none"
-            >
-            Show Suggested Questions
-          </button>
-        )}
         <input
           type="text"
           className="w-full py-2 px-3 border rounded-md focus:outline-none focus:border-blue-400"

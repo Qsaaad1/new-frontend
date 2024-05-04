@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import DehazeIcon from "@mui/icons-material/Dehaze";
@@ -52,6 +52,9 @@ export default function Navlist({ handleLogout }) {
     dispatch(SET_USER({ name: "", email: "" }));
     handleLogout();
   };
+
+
+ 
 
   return (
     <>

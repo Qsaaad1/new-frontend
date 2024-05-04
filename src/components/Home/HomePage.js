@@ -42,13 +42,7 @@ export default function Home() {
     top: 0,
   };
   
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      window.location.reload();
-    }, 20000);
-
-    return () => clearInterval(intervalId);
-  }, []);
+ 
 
   return (
     <div>

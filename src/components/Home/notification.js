@@ -11,26 +11,33 @@ const Notification = () => {
   const name = useSelector(selectName);
   const role = useSelector(selectRole);
 
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        let response;
-        if (role === "admin") {
-          response = await axios.get(
-            `${process.env.REACT_APP_RENDER_URL}/admin/notifications/${name}`
-          );
-        } else {
-          response = await axios.get(
-            `${process.env.REACT_APP_RENDER_URL}/notifications/${name}`
-          );
-        }
-        setNotifications(response.data);
-      } catch (error) {
-        console.error("Error fetching notifications:", error);
+  const fetchNotifications = async () => {
+    try {
+      let response;
+      if (role === "admin") {
+        response = await axios.get(
+          `${process.env.REACT_APP_RENDER_URL}/admin/notifications/${name}`
+        );
+      } else {
+        response = await axios.get(
+          `${process.env.REACT_APP_RENDER_URL}/notifications/${name}`
+        );
       }
-    };
+      setNotifications(response.data);
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+    }
+  };
 
+  useEffect(() => {
+    // Fetch notifications when the component mounts
     fetchNotifications();
+
+    // Set up interval to check for new notifications every 20 seconds
+    const interval = setInterval(fetchNotifications, 2000);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(interval);
   }, [name, role]); // Added name and role to the dependency array
 
   const handleNotificationClick = async (notificationId) => {
@@ -48,7 +55,7 @@ const Notification = () => {
       console.error("Error deleting notification:", error);
     }
   };
-
+  
   return (
     <Menu as="div" className="relative ml-3 my-auto">
       <div className="my-auto">
