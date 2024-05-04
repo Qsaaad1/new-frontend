@@ -29,7 +29,7 @@ const Graph = () => {
     { country: "Canada", students: 504, color: "#1f77b4" },
     { country: "Austria", students: 18, color: "#ff7f0e" },
     { country: "South Korea", students: 10, color: "#e377c2" },
-    { country: "United Kingdom", students: 378, color: "#ff7f0e" },
+    { country: "UK", students: 378, color: "#ff7f0e" },
     { country: "France", students: 32, color: "#2ca02c" },
     { country: "Spain", students: 8, color: "#1f77b4" },
     { country: "Russia", students: 24, color: "#17becf" },
