@@ -41,7 +41,7 @@ export default function Navlist({ handleLogout }) {
   ];
 
   const account = [
-    { name: "Register", href: "/signup", current: false },
+    { name: "Register", href: "/register", current: false },
     { name: "Login", href: "/login", current: false },
   ];
 
@@ -101,7 +101,7 @@ export default function Navlist({ handleLogout }) {
                                   </span>
                                   <img
                                     className="h-8 w-8  my-auto rounded-full"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                    src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
                                     alt=""
                                   />
                                 </Menu.Button>
@@ -183,7 +183,7 @@ export default function Navlist({ handleLogout }) {
                                 <span className="sr-only">Open user menu</span>
                                 <img
                                   className="h-8 w-8 ml-0.5 my-auto rounded-full"
-                                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                  src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
                                   alt=""
                                 />
                                 <span className="m-2  hover:bg-red-600 hover:text-white">

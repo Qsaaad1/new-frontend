@@ -140,13 +140,13 @@ const Chats = () => {
         <title>Chats - Aspiring Abroad</title>
         <meta
           name="description"
-          content="Explore and engage in chats with other users on Aspiring Abroad. Connect with fellow students, share insights, and seek advice on studying abroad."
+          content="Connect with students worldwide on Aspiring Abroad. Share insights, seek advice on studying abroad. Engage in meaningful chats!"
         />
         <meta
           name="keywords"
           content="chats, messaging, conversations, student community, study abroad, international students, chat application, peer support, student advice, communication platform"
         />
-        {/* Add other meta tags as needed */}
+        <link rel="canonical" href="https://aspiring-abroad.com/chats" />
       </Helmet>
 
       {/* Sidebar with receiver list */}

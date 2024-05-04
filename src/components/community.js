@@ -140,7 +140,7 @@ function Volunteer() {
           name="keywords"
           content="volunteer community, international student support, study abroad assistance, education volunteers, community engagement, student mentorship, study abroad advice, education support, cross-cultural exchange, student networking"
         />
-        {/* Add other meta tags as needed */}
+        <link rel="canonical" href="https://aspiring-abroad.com/community" />
       </Helmet>
 
       <div className="flex items-center justify-between pb-6">
