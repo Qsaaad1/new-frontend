@@ -101,7 +101,7 @@ export default function Navlist({ handleLogout }) {
                                   </span>
                                   <img
                                     className="h-8 w-8  my-auto rounded-full"
-                                    src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
+                                    src="https://cdn-icons-png.freepik.com/256/4128/4128176.png?semt=ais_hybrid"
                                     alt=""
                                   />
                                 </Menu.Button>
@@ -183,7 +183,7 @@ export default function Navlist({ handleLogout }) {
                                 <span className="sr-only">Open user menu</span>
                                 <img
                                   className="h-8 w-8 ml-0.5 my-auto rounded-full"
-                                  src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
+                                  src="https://cdn-icons-png.freepik.com/256/4128/4128176.png?semt=ais_hybrid"
                                   alt=""
                                 />
                                 <span className="m-2  hover:bg-red-600 hover:text-white">
