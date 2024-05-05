@@ -85,7 +85,7 @@ function MainScreen() {
                   <Link to="/registervolunteer">
                     <button
                       type="button"
-                      className="text-white bg-gradient-to-br from-red-700 to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800  rounded-lg text-sm sm:text-base  px-4 py-2  sm:px-5 sm:py-2.5  text-center me-2 mb-2"
+                      className="text-white bg-gradient-to-br from-red-700 to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300   rounded-lg text-sm sm:text-base  px-4 py-2  sm:px-5 sm:py-2.5  text-center me-2 mb-2"
                     >
                       Register as a Volunteer
                     </button>
@@ -95,7 +95,7 @@ function MainScreen() {
                   <Link to="/community">
                     <button
                       type="button"
-                      className="text-white bg-gradient-to-br from-red-700 to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800  rounded-lg text-sm sm:text-base  px-4 py-2  sm:px-5 sm:py-2.5  text-center me-2 mb-2"
+                      className="text-white bg-gradient-to-br from-red-700 to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300   rounded-lg text-sm sm:text-base  px-4 py-2  sm:px-5 sm:py-2.5  text-center me-2 mb-2"
                     >
                       Talk to students
                     </button>

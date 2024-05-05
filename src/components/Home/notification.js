@@ -104,9 +104,9 @@ const Notification = () => {
                         src={require(`/public/images/${notification.profile}.jpeg`)}
                         alt=""
                       />
-                      <div className="font-medium dark:text-white text-black">
+                      <div className="font-medium  text-black">
                         <div>{notification.sender}</div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                        <div className="text-sm text-gray-500 ">
                           {notification.text}
                         </div>
                       </div>
@@ -143,10 +143,10 @@ const Notification = () => {
                         src={require(`/public/images/${notification.profile}.jpeg`)}
                         alt=""
                       />
-                      <div className="dark:text-white text-black">
+                      <div className=" text-black">
                         <span className=" text-base">{notification.sender}&#8594;</span>
                         <span className=" text-base">{notification.receiver}</span>
-                        <div className=" text-left text-sm text-gray-500 dark:text-gray-400">
+                        <div className=" text-left text-sm text-gray-500 ">
                           {notification.text}
                         </div>
                       </div>

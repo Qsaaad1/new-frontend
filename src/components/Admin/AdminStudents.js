@@ -85,7 +85,7 @@ function AdminStudents() {
                   className="flex py-2 cursor-pointer hover:bg-gray-100"
                   onClick={() => handleCollectionClick(collection)}
                 >
-                  <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                  <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full ">
                     <svg
                       class="absolute w-12 h-12 text-gray-400 -left-1"
                       fill="currentColor"

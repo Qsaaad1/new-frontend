@@ -59,7 +59,7 @@ export default function Navlist({ handleLogout }) {
   return (
     <>
       <Navinfo />
-      <nav className="  sticky top-0 z-50 py-1 text-black bg-gradient-to-b  from-gray-100 to-white focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium text-sm text-center border border-gray-700">
+      <nav className="  sticky top-0 z-50 py-1 text-black bg-gradient-to-b  from-gray-100 to-white focus:ring-4 focus:outline-none focus:ring-red-300  font-medium text-sm text-center border border-gray-700">
         <Disclosure as="nav">
           {({ open }) => (
             <>
