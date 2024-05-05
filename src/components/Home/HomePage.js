@@ -29,8 +29,8 @@ export default function Home() {
     } else {
       intervalId = setInterval(() => {
         toggleChat();
-      }, 1200000); 
-    }    
+      }, 1200000);
+    }
     return () => clearInterval(intervalId);
   }, [showChat]);
 
@@ -41,8 +41,6 @@ export default function Home() {
     backgroundAttachment: "fixed",
     top: 0,
   };
-  
- 
 
   return (
     <div>
@@ -54,8 +52,9 @@ export default function Home() {
         />
         <meta
           name="keywords"
-          content="study abroad,Study abroad programs, international education, scholarships, foreign study, overseas education, Where should I study?, Living expenses in Germany, Living expenses in USA, Living expenses in Uk, Living expenses in Canada, Living expenses in France, Living expenses in Australia"
+          content="study abroad,Study abroad programs, international education, scholarships, foreign study, overseas education, Where should I study?, Global opportunities study abroad, How to study abroad?, Visa consultants"
         />
+        
         <link rel="canonical" href="https://aspiring-abroad.com/" />
       </Helmet>
 
@@ -74,11 +73,11 @@ export default function Home() {
           </div>
         </div>
       </header>
-      
+
       <Questions />
       <ContactPage />
       <Footer />
-      
+
       {showChat && (
         <div>
           <DialogBox onClose={toggleChat} />
