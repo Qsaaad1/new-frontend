@@ -8,29 +8,37 @@ export default function Footer() {
           <a
             href="https://chat.whatsapp.com/Gq6loN274u83YMgbrNj59E"
             className="social-icon transition-colors duration-300 hover:text-red-500"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <i className="fab fa-whatsapp"></i>
           </a>
           <a
             href="https://www.youtube.com/channel/UC33E27oPtODFkwlNIL53lTg"
             className="social-icon transition-colors duration-300 hover:text-red-500"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <i className="fab fa-youtube"></i>
           </a>
           <a
             href="https://www.instagram.com/aspiring_abroad?igsh=MXF2Y2p4Z2tnbmh1OA=="
             className="social-icon transition-colors duration-300 hover:text-red-500"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <i className="fab fa-instagram"></i>
           </a>
           <a
             href="https://www.linkedin.com/in/aniket-shah-98248b301?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
             className="social-icon transition-colors duration-300 hover:text-red-500"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <i className="fab fa-linkedin"></i>
           </a>
         </section>
-        <p className="text-xs mt-1 pt-1"> 
+        <p className="text-xs mt-1 pt-1 text-center"> 
           We are new and boot strapped please follow us to show your support.
         </p>
       </div>
