@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.f5049ca5.css",
-    "main.js": "/static/js/main.2fe5fb65.js",
+    "main.js": "/static/js/main.7bdc309f.js",
     "static/media/wavy.jpeg": "/static/media/wavy.e344ff0910c051831d92.jpeg",
     "static/media/signup.jpeg": "/static/media/signup.242a3fb3f8596571aac9.jpeg",
     "static/media/42 M.jpeg": "/static/media/42 M.270410e1ea1c75ab553d.jpeg",
@@ -82,10 +82,10 @@
     "static/media/rubik-hebrew-400-normal.woff2": "/static/media/rubik-hebrew-400-normal.9f12218709f0b72dbf18.woff2",
     "index.html": "/index.html",
     "main.f5049ca5.css.map": "/static/css/main.f5049ca5.css.map",
-    "main.2fe5fb65.js.map": "/static/js/main.2fe5fb65.js.map"
+    "main.7bdc309f.js.map": "/static/js/main.7bdc309f.js.map"
   },
   "entrypoints": [
     "static/css/main.f5049ca5.css",
-    "static/js/main.2fe5fb65.js"
+    "static/js/main.7bdc309f.js"
   ]
 }

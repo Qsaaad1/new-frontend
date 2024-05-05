@@ -5,7 +5,7 @@ function MainScreen() {
   const imagesWithText = [
     {
       imageUrl: "page-2.png",
-      heading: "Talk to students before going abroad and then take a call",
+      heading: "Talk to students at your dream destination",
       text1: "BE A PART OF THE BIGGEST COMMUNITY",
       text2: "OF INTERNATIONAL STUDENTS",
       isStudentButtonVisible: false,
