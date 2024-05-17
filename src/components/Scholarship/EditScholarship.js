@@ -22,7 +22,7 @@ export default function EditScholarship() {
   useEffect(() => {
     async function fetchScholarship() {
       try {
-        const response = await axios.get(`https://aspiring-abroad.com/api/scholarships/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_RENDER_URL}/scholarships/${id}`);
         console.log(response.data);
         const scholarshipData = response.data;
         setName(scholarshipData.name);
@@ -60,7 +60,7 @@ export default function EditScholarship() {
     formData.append('additional', additional);
     console.log(formData);
     try {
-      const response = await axios.put(`https://aspiring-abroad.com/api/scholarship/${id}`, formData, {
+      const response = await axios.put(`${process.env.REACT_APP_RENDER_URL}/scholarship/${id}`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -77,12 +77,9 @@ export default function EditScholarship() {
   }
 
   async function deleteScholarship() {
-    const confirmed = window.confirm("Are you sure you want to delete this Scholarhip?");
-    if (!confirmed) {
-      return;
-    }
+    if (window.confirm('Are you sure you want to delete this scholarship?')) {
     try {
-      const response = await axios.delete(`https://aspiring-abroad.com/api/scholarship/${id}`, {
+      const response = await axios.delete(`${process.env.REACT_APP_RENDER_URL}/scholarships/${id}`, {
         withCredentials: true
       });
       if (response.status === 200) {
@@ -91,7 +88,7 @@ export default function EditScholarship() {
     } catch (error) {
       console.error('Error deleting scholarship:', error);
     }
-  }
+  }}
 
   if (loading) {
     return <div>Loading...</div>;
@@ -211,3 +208,4 @@ export default function EditScholarship() {
     </div>
   );
 }
+
