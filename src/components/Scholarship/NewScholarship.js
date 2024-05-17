@@ -36,7 +36,7 @@ export default function ScholarshipPost() {
     formData.append('additional', additional);
     console.log(formData);
     try {
-      const response = await axios.post(`${process.env.REACT_APP_RENDER_URL}/scholarship`, formData, {
+      const response = await axios.post(`https://aspiring-abroad.com/api/scholarship`, formData, {
         withCredentials: true, // Ensure credentials are included
         headers: {
           'Content-Type': 'multipart/form-data'
