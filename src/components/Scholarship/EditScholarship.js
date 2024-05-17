@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useSelector } from "react-redux";
 import { selectRole } from "../../redux/features/auth/authSlice";
@@ -17,6 +17,7 @@ export default function EditScholarship() {
   const [redirect, setRedirect] = useState(false);
   const [loading, setLoading] = useState(true); // To show loading indicator while fetching data
   const role = useSelector(selectRole);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchScholarship() {
@@ -45,6 +46,7 @@ export default function EditScholarship() {
     return <Navigate to="/" />;
   }
 
+  
   async function updateScholarship(ev) {
     ev.preventDefault();
     const formData = new FormData();
@@ -71,6 +73,23 @@ export default function EditScholarship() {
     } catch (error) {
       console.error('Error updating scholarship:', error);
       // Handle error here
+    }
+  }
+
+  async function deleteScholarship() {
+    const confirmed = window.confirm("Are you sure you want to delete this Scholarhip?");
+    if (!confirmed) {
+      return;
+    }
+    try {
+      const response = await axios.delete(`https://aspiring-abroad.com/api/scholarship/${id}`, {
+        withCredentials: true
+      });
+      if (response.status === 200) {
+        setRedirect(true);
+      }
+    } catch (error) {
+      console.error('Error deleting scholarship:', error);
     }
   }
 
@@ -181,6 +200,12 @@ export default function EditScholarship() {
           >
             Update Scholarship
           </button>
+          <button
+              className="inline-block bg-red-600 text-white py-2 px-4 mx-2 rounded-md text-sm"
+              onClick={deleteScholarship}
+            >
+              Delete
+            </button>
         </div>
       </form>
     </div>

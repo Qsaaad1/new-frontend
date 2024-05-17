@@ -1,7 +1,6 @@
 import Post from "../../Post";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import NotFoundPage from "../NotFoundPage";
 
 export default function IndexPage() {
   const [posts, setPosts] = useState([]);
@@ -61,6 +60,7 @@ export default function IndexPage() {
                   />
                 </div>
               ))}
+              
           </div>
         </div>
       

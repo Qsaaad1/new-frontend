@@ -18,6 +18,7 @@ function BlogPost({ _id, cover, title, createdAt, summary }) {
           <p className="post-summary text-sm text-gray-700">{summary}</p>
         </div>
       </Link>
+      
     </div>
   );
   

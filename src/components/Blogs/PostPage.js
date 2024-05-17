@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { formatISO9075 } from "date-fns";
 import { useSelector } from "react-redux";
 import { selectRole } from "../../redux/features/auth/authSlice";
@@ -8,6 +8,7 @@ export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
   const { id } = useParams();
   const role = useSelector(selectRole);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_RENDER_URL}/blog/${id}`)
@@ -24,6 +25,29 @@ export default function PostPage() {
         console.error("Error fetching post:", error);
       });
   }, [id]);
+
+  const handleDelete = () => {
+    const confirmed = window.confirm("Are you sure you want to delete this blog?");
+    if (!confirmed) {
+      return;
+    }
+
+    fetch(`${process.env.REACT_APP_RENDER_URL}/blog/delete/${id}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to delete post');
+        }
+        return response.json();
+      })
+      .then(() => {
+        navigate('/blogs'); // Redirect to home after deletion
+      })
+      .catch(error => {
+        console.error('Error deleting post:', error);
+      });
+  };
 
   if (!postInfo) {
     return <div>Loading...</div>;
@@ -48,6 +72,12 @@ export default function PostPage() {
             >
               Edit this post
             </Link>
+            <button
+              className="inline-block bg-red-600 text-white py-2 px-4 mx-2 rounded-md text-sm"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
           </div>
         )}
         <time className="block text-sm text-gray-500 mb-4">
@@ -60,5 +90,4 @@ export default function PostPage() {
       />
     </div>
   );
-  
 }

@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 
 const Scholarship = () => {
   const [scholarships, setScholarships] = useState([]);
-  const [error, setError] = useState(false); 
+  const [error, setError] = useState(false);
   const role = useSelector(selectRole);
 
   useEffect(() => {
@@ -78,20 +78,23 @@ const Scholarship = () => {
                       </p>
                     </div>
                     <div className="flex flex-col text-center gap-1">
-                      {role === "admin" && (
-                        <Link
-                          to={`/edit/scholarships/${scholarship.id}`}
-                          className="inline-block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300"
-                        >
-                          Edit
-                        </Link>
-                      )}
                       <Link
                         to={`/scholarships/${scholarship.id}`}
                         className="inline-block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300"
                       >
                         Learn More
                       </Link>
+                      {role === "admin" && (
+                        <>
+                          <Link
+                            to={`/edit/scholarships/${scholarship.id}`}
+                            className="inline-block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300"
+                          >
+                            Edit
+                          </Link>
+                         
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
