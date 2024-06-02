@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function ScholarshipPage() {
   const { id } = useParams();
@@ -9,23 +9,43 @@ function ScholarshipPage() {
   useEffect(() => {
     const fetchScholarship = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_RENDER_URL}/scholarships/${id}`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_RENDER_URL}/scholarships/${id}`
+        );
         setScholarshipData(response.data);
       } catch (error) {
-        console.error('Error fetching scholarship:', error);
+        console.error("Error fetching scholarship:", error);
       }
     };
 
     fetchScholarship();
   }, [id]);
 
+  const renderFormattedText = (text) => {
+    return text.split("\n").map((str, index) => (
+      <p key={index} className="mb-2">
+        {str}
+      </p>
+    ));
+  };
+
+  const renderList = (text) => {
+    return (
+      <ul className="list-disc pl-5">
+        {text.split("\n").map((str, index) => (
+          <li key={index}>{str}</li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
-      
-      
       {scholarshipData ? (
         <>
-          <h1 className="text-3xl font-semibold mb-4">{scholarshipData.name}</h1>
+          <h1 className="text-3xl font-semibold mb-4">
+            {scholarshipData.name}
+          </h1>
           <div className="max-w-full mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
             <div className="relative">
               <img
@@ -35,28 +55,26 @@ function ScholarshipPage() {
               />
             </div>
             <div className="p-4">
-            <div className="mb-4">
+              <div className="mb-4">
                 <h2 className="text-lg font-semibold mb-2">Information</h2>
-                <p>{scholarshipData.additional}</p>
+                {renderFormattedText(scholarshipData.additional)}
               </div>
               <div className="mb-4">
                 <h2 className="text-lg font-semibold mb-2">Funding</h2>
-                <p>{scholarshipData.funding}</p>
+                {renderFormattedText(scholarshipData.funding)}
               </div>
               <div className="mb-4">
-                <h2 className="text-lg font-semibold mb-2 ">Eligibility</h2>
-                <p>{scholarshipData.eligibility}</p>
+                <h2 className="text-lg font-semibold mb-2">Eligibility</h2>
+                {renderFormattedText(scholarshipData.eligibility)}
               </div>
               <div className="mb-4">
                 <h2 className="text-lg font-semibold mb-2">Process</h2>
-                <p>{scholarshipData.process}</p>
+                {renderFormattedText(scholarshipData.process)}
               </div>
-              
               <div className="mb-4">
                 <h2 className="text-lg font-semibold mb-2">Dates</h2>
-                <p>{scholarshipData.dates}</p>
+                {renderFormattedText(scholarshipData.dates)}
               </div>
-             
             </div>
           </div>
         </>
