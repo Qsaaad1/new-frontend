@@ -142,7 +142,7 @@ export default function EditScholarship() {
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="funding">
             Funding
           </label>
-          <input
+          <textarea
             id="funding"
             type="text"
             placeholder="Funding"
@@ -179,9 +179,9 @@ export default function EditScholarship() {
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="dates">
             Dates
           </label>
-          <input
+          <textarea
             id="dates"
-            type="date"
+            // type="date"
             placeholder="Dates"
             value={dates}
             onChange={(ev) => setDates(ev.target.value)}
