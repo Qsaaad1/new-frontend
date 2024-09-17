@@ -26,7 +26,9 @@ const UsersChats = () => {
     fetchReceivers();
     const interval = setInterval(() => {
       if (selectedReceiver) {
-        fetchChatMessages(selectedReceiver.First_Name+ " " +selectedReceiver.Last_name);
+        fetchChatMessages(
+          selectedReceiver.First_Name + " " + selectedReceiver.Last_name
+        );
       }
     }, 5000); // Call every 10 seconds
     return () => clearInterval(interval);
@@ -45,7 +47,6 @@ const UsersChats = () => {
       const response = await axios.get(
         `${process.env.REACT_APP_RENDER_URL}/admin/receivers/${user}`
       );
-      console.log(response.data);
       setReceivers(response.data);
     } catch (error) {
       console.error("Error fetching receivers:", error);
@@ -277,19 +278,31 @@ const UsersChats = () => {
                 }}
               >
                 {chatMessages.map((message, index) => (
-                  <div
-                    key={index}
-                    className={`mb-2 ${
-                      message.sender === user ? "text-left" : "text-right"
-                    }`}
-                  >
-                    <div className="inline-block max-w-2/3 bg-white rounded-lg p-2 shadow-md">
-                      <div className="text-lg">{message.text}</div>
-                      <div className="text-xs text-gray-500">
-                        {formatMessageTime(message.createdAt)}
-                      </div>
-                    </div>
-                  </div>
+                   <div
+                   key={index}
+                   className={`mb-2 ${
+                     message.sender === user ? "text-left" : "text-right"
+                   }`}
+                 >
+                   <div
+                     className={`inline-block min-w-20 max-w-72 sm:max-w-sm md:max-w-2xl  p-2 rounded-lg shadow-md ${
+                       message.sender === user
+                         ? "bg-gray-700 text-white  "
+                         : "bg-red-500 text-white "
+                     }`}
+                   >
+                     <div className="text-lg text-justify">{message.text}</div>
+                     <div
+                       className={`text-xs ${
+                         message.sender === user
+                           ? "text-gray-100"
+                           : "text-gray-100"
+                       }`}
+                     >
+                       {formatMessageTime(message.createdAt)}
+                     </div>
+                   </div>
+                 </div>
                 ))}
               </div>
             )}

@@ -7,6 +7,7 @@ import { selectRole } from "../../redux/features/auth/authSlice";
 function AdminChats() {
   const [collections, setCollections] = useState([]);
   const [filteredCollections, setFilteredCollections] = useState([]);
+  const [unreadMessages, setUnreadMessages] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
@@ -28,31 +29,53 @@ function AdminChats() {
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_RENDER_URL}/user-collections`
-      ); // Update the URL
+      );
       setCollections(response.data);
+      // Fetch unread messages for all collections after fetching them
+      fetchUnreadMessages(response.data);
     } catch (error) {
       console.error("Error fetching collections:", error);
     }
   };
 
+  const fetchUnreadMessages = async (collections) => {
+    const unreadStatus = [{}];
+    for (const user of collections) {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_RENDER_URL}/admin/receivers/${user.name}`
+        );
+        // Assuming the response contains unread messages count or a flag
+        let sum =  0;
+        for (let i = 0; i < response.data.length; i++) {
+          
+          if (response.data[i].unreadCount > 0){
+            sum = sum + response.data[i].unreadCount;
+          }
+        }
+        unreadStatus[user.name] = sum;
+        
+      } catch (error) {
+        console.error(`Error fetching unread messages for ${user.name}:`, error);
+        unreadStatus[user.name] = false; // Default to no unread messages if there's an error
+      }
+    }
+    setUnreadMessages(unreadStatus);
+  };
+
   const handleCollectionClick = async (user) => {
     try {
-      // Fetch receiver data from the backend
       const response = await axios.get(
         `${process.env.REACT_APP_RENDER_URL}/receivers/${user.name}`
       );
 
-      // Check if receiver data exists
       if (response.data.length > 0) {
-        // Redirect to /admin/:user upon collection click
         navigate(`/admin/${user.name}`);
       } else {
-        // Show alert if no receiver found
         setShowAlert(true);
       }
     } catch (error) {
       console.error("Error fetching receiver data:", error);
-      // Handle error, such as displaying an error message to the user
     }
   };
 
@@ -61,12 +84,11 @@ function AdminChats() {
   };
 
   if (role !== "admin") {
-    return <Navigate to="/" />; // Assuming you have a login page, change this accordingly
+    return <Navigate to="/" />;
   }
 
   return (
     <>
-      {/* Alert */}
       {showAlert && (
         <div className="fixed top-0 right-0 z-50 p-4">
           <div className="bg-red-100 border border-red-400 text-red-700 px-12 py-4 my-auto rounded relative" role="alert">
@@ -79,7 +101,6 @@ function AdminChats() {
       )}
 
       <div className="flex min-h-screen">
-        {/* Sidebar */}
         <div className={`w-full bg-gray-200 border-r border-gray-300 p-4`}>
           <h2 className="font-bold text-lg mb-4">Collections</h2>
           <div className="relative">
@@ -90,20 +111,18 @@ function AdminChats() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            
           </div>
-          {/* Scrollable list */}
           <div className="overflow-y-auto max-h-[calc(100vh-6rem)]">
             <ul>
               {filteredCollections.map((collection, index) => (
                 <li
                   key={index}
-                  className="flex py-2 cursor-pointer hover:bg-gray-100"
+                  className="flex py-2 cursor-pointer hover:bg-gray-100 relative"
                   onClick={() => handleCollectionClick(collection)}
                 >
-                  <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full ">
+                  <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full ">
                     <svg
-                      class="absolute w-12 h-12 text-gray-400 -left-1"
+                      className="absolute w-12 h-12 text-gray-400 -left-1"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -116,8 +135,11 @@ function AdminChats() {
                     </svg>
                   </div>
                   <p className="align-self-center ml-2 font-semibold">
-                    {collection.name +" ("+ collection.fullname  +") "}
+                    {collection.name + " (" + collection.fullname + ")"}
                   </p>
+                  {unreadMessages[collection.name]>0 &&   (
+                    <span className="w-6 h-6 my-auto ml-1 rounded-full bg-green-600 text-center">  {unreadMessages[collection.name]} </span>
+                  )}
                 </li>
               ))}
             </ul>

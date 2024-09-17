@@ -27,12 +27,13 @@ const Chats = () => {
     fetchReceivers();
     const interval = setInterval(() => {
       if (selectedReceiver) {
-        fetchChatMessages(selectedReceiver.First_Name+ " " +selectedReceiver.Last_name);
+        fetchChatMessages(
+          selectedReceiver.First_Name + " " + selectedReceiver.Last_name
+        );
       }
     }, 5000); // Call every 10 seconds
     return () => clearInterval(interval);
   }, [chatMessages, selectedReceiver]);
-
 
   useEffect(() => {
     setFilteredReceivers(
@@ -68,7 +69,6 @@ const Chats = () => {
     const response = await axios.get(
       `${process.env.REACT_APP_RENDER_URL}/${receiver.receiver}/${username}`
     );
-    console.log(response.data[0]);
     setSelectedReceiver(response.data[0]);
     fetchChatMessages(receiver.receiver);
     setSidebarVisible(false); // Hide sidebar on receiver click
@@ -109,7 +109,7 @@ const Chats = () => {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [chatMessages]);
+  }, [chatMessages,selectedReceiver]);
 
   // Function to check if a date is today
   const isToday = (date) => {
@@ -255,18 +255,30 @@ const Chats = () => {
           >
             {chatMessages.map((message, index) => (
               <div
-                key={index}
-                className={`mb-2 ${
-                  message.sender === username ? "text-right" : "text-left"
+              key={index}
+              className={`mb-2 ${
+                message.sender === username ? "text-right" : "text-left"
+              }`}
+            >
+              <div
+                className={`inline-block min-w-20 max-w-72 sm:max-w-sm md:max-w-2xl  p-2 rounded-lg shadow-md ${
+                  message.sender === username
+                    ? "bg-red-500 text-white"
+                    : "bg-gray-700 text-white "
                 }`}
               >
-                <div className="inline-block max-w-2/3 bg-white rounded-lg p-2 shadow-md">
-                  <div className="text-lg">{message.text}</div>
-                  <div className="text-xs text-gray-500">
-                    {formatMessageTime(message.createdAt)}
-                  </div>
+                <div className="text-lg text-justify">{message.text}</div>
+                <div
+                  className={`text-xs ${
+                    message.sender === username
+                      ? "text-gray-100"
+                      : "text-gray-100"
+                  }`}
+                >
+                  {formatMessageTime(message.createdAt)}
                 </div>
               </div>
+            </div>
             ))}
           </div>
         )}
@@ -278,7 +290,9 @@ const Chats = () => {
             {selectedReceiver && showSuggestedQuestions ? (
               <div className="absolute bottom-24 max-w-56 sm:max-w-xs bg-red-500 p-4 ml-5 rounded-lg shadow-md text-white">
                 <div className="flex justify-between mb-2">
-                  <h3 className="font-semibold mb-2 text-lg">Suggested Questions:</h3>
+                  <h3 className="font-semibold mb-2 text-lg">
+                    Suggested Questions:
+                  </h3>
                   <button
                     onClick={() => setShowSuggestedQuestions(false)}
                     className="text-white hover:text-gray-200 mb-3 focus:outline-none"
@@ -289,20 +303,14 @@ const Chats = () => {
                 <div className="flex flex-wrap gap-2">
                   <button
                     className="bg-white text-xs text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
-                    onClick={() =>
-                      setNewMessage(
-                        "What's your cost of living?"
-                      )
-                    }
+                    onClick={() => setNewMessage("What's your cost of living?")}
                   >
                     What's your cost of living?
                   </button>
                   <button
                     className="bg-white text-xs text-red-500 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100 focus:outline-none w-full"
                     onClick={() =>
-                      setNewMessage(
-                        "⁠Is this right to come there?"
-                      )
+                      setNewMessage("⁠Is this right to come there?")
                     }
                   >
                     ⁠Is this right to come there?

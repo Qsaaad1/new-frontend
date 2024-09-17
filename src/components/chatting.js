@@ -138,9 +138,21 @@ export default function Chatting() {
                 message.sender === username ? "text-right" : "text-left"
               }`}
             >
-              <div className="inline-block max-w-2/3 bg-white rounded-lg p-2 shadow-md">
-                <div className="text-lg">{message.text}</div>
-                <div className="text-xs text-gray-500">
+              <div
+                className={`inline-block min-w-20 max-w-72 sm:max-w-sm md:max-w-2xl  p-2 rounded-lg shadow-md ${
+                  message.sender === username
+                    ? "bg-red-500 text-white"
+                    : "bg-gray-700 text-white "
+                }`}
+              >
+                <div className="text-lg text-justify">{message.text}</div>
+                <div
+                  className={`text-xs ${
+                    message.sender === username
+                      ? "text-gray-100"
+                      : "text-gray-100"
+                  }`}
+                >
                   {formatMessageTime(message.createdAt)}
                 </div>
               </div>
